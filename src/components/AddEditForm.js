@@ -3,16 +3,17 @@ import Input from './Input';
 import PropTypes from 'prop-types'
 
 
-class AddContactForm extends Component {
+class AddEditForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      dateMet: '',
-      notes: ''
+      id: this.props.contact.id,
+      name: this.props.contact.name,
+      email: this.props.contact.email,
+      phone: this.props.contact.phone,
+      company: this.props.contact.company,
+      dateMet: this.props.contact.dateMet,
+      notes: this.props.contact.notes
     };
   }
 
@@ -21,11 +22,11 @@ class AddContactForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, phone, company, dateMet, notes } = this.state;
+    const {id, name, email, phone, company, dateMet, notes } = this.state;
 
-    const newContact = { name, email, phone, company, dateMet, notes };
+    const updateContact = {id, name, email, phone, company, dateMet, notes };
 
-    this.props.onSubmitParent(newContact);
+    this.props.onSubmitParent(updateContact);
   };
 
   render() {
@@ -74,15 +75,16 @@ class AddContactForm extends Component {
             value={notes}
             onChange={this.onChange}
           />
-          <button className="btn btn-success">Add Contact</button>
+          <button className="btn btn-success">Update Contact</button>
         </form>
       </div>
     );
   }
 }
 
-AddContactForm.propTypes = {
-  onSubmitParent: PropTypes.func.isRequired
-};
+AddEditForm.propTypes = {
+    contact: PropTypes.object.isRequired,
+    onSubmitParent: PropTypes.func.isRequired
+  };
 
-export default AddContactForm;
+export default AddEditForm;
