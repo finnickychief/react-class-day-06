@@ -68,8 +68,22 @@ export default class ContactCard extends Component {
             <p>
               <strong>Notes:</strong> {contact.notes}
             </p>
-            <button className="btn btn-warning" onClick={this.props.goToEdit.bind(this, contact)}>Update Contact</button>
-            <button className="btn btn-danger" onClick={this.props.deleteContact.bind(this, contact)}>Delete</button>
+            {this.props.goToEdit && (
+              <button
+                className="btn btn-warning"
+                onClick={this.props.goToEdit.bind(this, contact)}
+              >
+                Update Contact
+              </button>
+            )}
+            {this.props.deleteContact && (
+              <button
+                className="btn btn-danger"
+                onClick={this.props.deleteContact.bind(this, contact)}
+              >
+                Delete
+              </button>
+            )}
           </div>
         ) : null}
       </div>
